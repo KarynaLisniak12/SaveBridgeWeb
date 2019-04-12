@@ -139,7 +139,7 @@
        padding: 0 0 4px 0
    }
    .left_col {
-       background: #F6F6F6
+       background: #2A3F54
    }
    .nav-sm .container.body .col-md-3.left_col {
        min-height: 100%;
@@ -334,7 +334,7 @@
    }
    .nav-md .container.body .col-md-3.left_col {
        min-height: 100%;
-       width: 230px;
+       width: 30px;
        padding: 0;
        position: absolute;
        display: -ms-flexbox;
@@ -355,7 +355,7 @@
    .nav_title {
        width: 230px;
        float: left;
-       background: #F6F6F6;
+       background: #2A3F54;
        border-radius: 0;
        height: 57px
    }
@@ -471,7 +471,7 @@
    }
    .container {
        width: 100%;
-       padding: 0
+       padding: 0;
    }
    .navbar-nav>li>a,
    .navbar-brand,
@@ -718,6 +718,7 @@
        margin-top: 0
    }
    .nav.side-menu>li {
+       width: 100%;
        position: relative;
        display: block;
        cursor: pointer
@@ -800,7 +801,7 @@
    }
    .nav.side-menu>li.active>a {
        text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
-       background: linear-gradient(#334556, #2C4257), #F6F6F6;
+       background: linear-gradient(#334556, #2C4257), #2A3F54;
        box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0
    }
    .navbar-brand,
@@ -1670,7 +1671,7 @@
        padding: 5px 0 0 0;
        position: fixed;
        width: 230px;
-       background: #F6F6F6;
+       background: #2A3F54;
        z-index:999;
    }
    .sidebar-footer a {
