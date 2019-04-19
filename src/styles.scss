@@ -1108,7 +1108,7 @@
        padding-bottom: 7px
    }
    .demo-placeholder {
-       height: 280px
+       height: 70vh;
    }
    .profile_details:nth-child(3n) {
        clear: both
@@ -2430,10 +2430,10 @@
        background-color: #f5f5f5;
        background-image: linear-gradient(to bottom, #fff, #e6e6e6);
        background-repeat: repeat-x;
-       filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+       filter: gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
        border-color: #e6e6e6 #e6e6e6 #bfbfbf;
        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-       filter: progid: DXImageTransform.Microsoft.gradient(enabled=false);
+       filter: gradient(enabled=false);
        border: 1px solid #cccccc;
        border-bottom-color: #b3b3b3;
        border-radius: 4px;
@@ -2787,8 +2787,8 @@
        border-bottom: 1px solid rgba(101, 204, 182, 0.16);
        padding-bottom: 15px;
        border-radius: 4px;
-       filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
-       filter: progid: DXImageTransform.Microsoft.gradient(enabled=false);
+       filter: gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+       filter: gradient(enabled=false);
        padding-bottom: 10px;
        box-shadow: 0 4px 6px -6px #222
    }
@@ -3586,7 +3586,7 @@
    .button {
        background: #f7f9fa;
        background: linear-gradient(to bottom, #f7f9fa 0%, #f0f0f0 100%);
-       filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f7f9fa', endColorstr='#f0f0f0', GradientType=0);
+       filter: gradient( startColorstr='#f7f9fa', endColorstr='#f0f0f0', GradientType=0);
        -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
        -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
@@ -4252,4 +4252,96 @@
        background-color: #ffff !important;
    }
    /** /bootstrap-datetimepicker **/
+
+   /** /building-dashboard map **/
+   #map-container {
+        width: 100%;
+        height: 70vh;
+        overflow: hidden;
+    }
+   .map-marker {
+        /* adjusting for the marker dimensions
+        so that it is centered on coordinates */
+        margin-left: -8px;
+        margin-top: -8px;
+    }
+    .map-marker.map-clickable {
+        cursor: pointer;
+    }
+    .pulse {
+        width: 10px;
+        height: 10px;
+        border: 5px solid;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        background-color: #716f42;
+        z-index: 10;
+        position: absolute;
+    }
+    .dot {
+        border: 10px solid;
+        background: transparent;
+        -webkit-border-radius: 60px;
+        -moz-border-radius: 60px;
+        border-radius: 60px;
+        height: 50px;
+        width: 50px;
+        -webkit-animation: pulse 2s ease-out;
+        -moz-animation: pulse 2s ease-out;
+        animation: pulse 2s ease-out;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        z-index: 1;
+        opacity: 0;
+    }
+    @-moz-keyframes pulse {
+        0% {
+            -moz-transform: scale(0);
+            opacity: 0.0;
+        }
+        25% {
+            -moz-transform: scale(0);
+            opacity: 0.1;
+        }
+        50% {
+            -moz-transform: scale(0.1);
+            opacity: 0.3;
+        }
+        75% {
+            -moz-transform: scale(0.5);
+            opacity: 0.5;
+        }
+        100% {
+            -moz-transform: scale(1);
+            opacity: 0.0;
+        }
+    }
+    @-webkit-keyframes pulse {
+        0% {
+            -webkit-transform: scale(0);
+            opacity: 0.0;
+        }
+        25% {
+            -webkit-transform: scale(0);
+            opacity: 0.1;
+        }
+        50% {
+            -webkit-transform: scale(0.1);
+            opacity: 0.3;
+        }
+        75% {
+            -webkit-transform: scale(0.5);
+            opacity: 0.5;
+        }
+        100% {
+            -webkit-transform: scale(1);
+            opacity: 0.0;
+        }
+    }
+   /** /building-dashboard map **/
    
