@@ -13,6 +13,14 @@ const routes: Routes = [
   { 
     path: 'building', 
     loadChildren: 'src/app/pages/building-management/building-management.module#BuildingManagementModule' 
+  },
+  { 
+    path: 'device', 
+    loadChildren: 'src/app/pages/device-management/device-management.module#DeviceManagementModule' 
+  },
+  { 
+    path: 'statistic', 
+    loadChildren: 'src/app/pages/statistic/statistic.module#StatisticModule' 
   }
 ];
 

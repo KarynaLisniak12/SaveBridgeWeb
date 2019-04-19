@@ -888,7 +888,7 @@
        min-width: 70px
    }
    .panel_toolbox>li {
-       float: left;
+       float: right;
        cursor: pointer
    }
    .panel_toolbox>li>a {
@@ -4344,4 +4344,11 @@
         }
     }
    /** /building-dashboard map **/
+
+   /** /common chart parameters **/
+   #chart-common {
+        width: 100%;
+        height: 500px;
+    }
+   /** /common chart parameters **/
    
