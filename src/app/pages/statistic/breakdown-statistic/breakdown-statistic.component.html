@@ -3,6 +3,83 @@
       <div class="main_container">
           <app-sidebar></app-sidebar>
           <app-top-menu></app-top-menu>
+
+          <!-- page content -->
+          <div class="right_col" role="main">
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="dashboard_graph">
+
+                  <div class="row x_title">
+                    <div class="col-md-6">
+                      <h3>Statistic by Breakdown Percent <small>countries, cities.</small></h3>
+                    </div>
+                  </div>
+
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div id="chart-common" class="demo-placeholder"></div>
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+                    <div class="x_title">
+                      <h2>Options</h2>
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-6">
+                      <div>
+                        <p>Comparative Parameters:</p>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" checked="checked"> only Country
+                          </label>
+                        </div>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" checked="checked"> only City
+                          </label>
+                        </div>
+                      </div>
+                      <div>
+                        <p>Countries:</p>
+                        <div class="form-group">
+                          <div class="col-fluid-md-12 col-fluid-sm-12 col-fluid-xs-12">
+                            <select class="form-control">
+                              <option>All</option>
+                              <option>Option one</option>
+                              <option>Option two</option>
+                              <option>Option three</option>
+                              <option>Option four</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <p>Cities:</p>
+                        <div class="form-group">
+                          <div class="col-fluid-md-12 col-fluid-sm-12 col-fluid-xs-12">
+                            <select class="form-control">
+                              <option>All</option>
+                              <option>Option one</option>
+                              <option>Option two</option>
+                              <option>Option three</option>
+                              <option>Option four</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>                  
+                  </div>
+
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+
+            </div>
+            <br />
+          </div>
+          <!-- /page content -->
+
       </div>
   </div>
 </div>
