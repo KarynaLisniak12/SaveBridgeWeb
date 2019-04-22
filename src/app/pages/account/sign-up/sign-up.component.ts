@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+
+import { AccountService } from 'src/app/shared/services/account.service';
+import { SignUpModel } from 'src/app/shared/models/account/signUp.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,9 +11,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  validateForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: AccountService
+  ) { }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
+    this.validateForm = this.formBuilder.group({
+      email: [null, [
+          Validators.email
+        ]
+      ],
+      password: [null],
+      confirmPassword: [null]
+    });
+  }
+
+  signUp() {
+    var signUpModel = this.getModelByForm();
+
+    this.service.signUp(signUpModel)
+      .subscribe(response => {
+        localStorage.setItem('token', response);
+      },
+        error => console.log(error)
+    );
+  }
+
+  private getModelByForm(): SignUpModel {
+    var signInModel = new SignUpModel();
+    signInModel.email = this.validateForm.value.email;
+    signInModel.password = this.validateForm.value.password;
+    signInModel.confirmPassword = this.validateForm.value.confirmPassword;
+
+    return signInModel;
   }
 
 }

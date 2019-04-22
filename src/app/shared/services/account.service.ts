@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-import { SignInModel } from '../models/signIn.model';
-import { SignUpModel } from '../models/signUp.model';
+import { SignInModel } from '../models/account/signIn.model';
+import { SignUpModel } from '../models/account/signUp.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +21,9 @@ export class AccountService {
       .post<string>((`${this.url}signin`), model);
   }
 
-  signUp(model: SignUpModel) {
+  signUp(model: SignUpModel): Observable<string> {
     return this.http
-      .post((`${this.url}signup`), model);
+      .post<string>((`${this.url}signup`), model);
   }
 
 }

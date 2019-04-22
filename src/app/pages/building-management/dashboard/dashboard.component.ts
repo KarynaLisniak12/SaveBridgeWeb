@@ -6,6 +6,9 @@ import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
 import am4themes_animated from '@amcharts/amcharts4/themes/dataviz';
 
+import { BuildingService } from 'src/app/shared/services/building.service';
+import { BuildingModel } from 'src/app/shared/models/building/building.model';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -13,52 +16,41 @@ import am4themes_animated from '@amcharts/amcharts4/themes/dataviz';
 })
 export class DashboardComponent implements OnInit {
 
-  public chart: am4maps.MapChart;
-  public imageSeries: am4maps.MapImageSeries;
+  chart: am4maps.MapChart;
+  imageSeries: am4maps.MapImageSeries;
 
-  constructor() { }
+  private buildings: Array<BuildingModel>;
+
+  constructor(private service: BuildingService) { }
 
   ngOnInit() {
-    this.initAmchartsMap();
-  }
-
-  ngAfterViewInit() {
+    this.getBuildings();
   }
 
   initAmchartsMap() {
+
     am4core.useTheme(am4themes_dataviz);
     am4core.useTheme(am4themes_animated);
     
     this.chart = am4core.create("map-container", am4maps.MapChart);
     this.imageSeries = this.chart.series.push(new am4maps.MapImageSeries());
-
-    // Set map definition    
     this.chart.geodata = am4geodata_worldLow;
-
-    // Set projection
     this.chart.projection = new am4maps.projections.Miller();
 
-    // Create map polygon series
     let polygonSeries = this.chart.series.push(new am4maps.MapPolygonSeries());
-
-    // Exclude Antartica
     polygonSeries.exclude = ["AQ"];
-
-    // Make map load polygon (like country names) data from GeoJSON
     polygonSeries.useGeodata = true;
 
-    // Configure series
     let polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = "{name}";
     polygonTemplate.fill = this.chart.colors.getIndex(0).lighten(0.5);
 
-    // Create hover state and set alternative fill color
     let hs = polygonTemplate.states.create("hover");
     hs.properties.fill = this.chart.colors.getIndex(0);
 
-    // Add image series
     this.imageSeries.mapImages.template.propertyFields.longitude = "longitude";
     this.imageSeries.mapImages.template.propertyFields.latitude = "latitude";
+    this.imageSeries.data = this.buildings;
     this.imageSeries.data = [ {
       "zoomLevel": 5,
       "scale": 0.5,
@@ -171,67 +163,61 @@ export class DashboardComponent implements OnInit {
       "longitude": 28.1876
     } ];
 
-    // add events to recalculate map position when the map is moved or zoomed
     this.chart.events.on( "mappositionchanged", this.updateCustomMarkers, this );
   }
 
-  updateCustomMarkers(event) {  
+  updateCustomMarkers() {  
 
     var map = this;
 
-    // go through all of the images
     map.imageSeries.mapImages.each(function(image) {
-      // check if it has corresponding HTML element
       if (!image.dummyData || !image.dummyData.externalElement) {
-        // create onex
         image.dummyData = {
           externalElement: map.createCustomMarker(image)
         };
       }
   
-      // reposition the element accoridng to coordinates
       let xy = map.chart.geoPointToSVG( { longitude: image.longitude, latitude: image.latitude } );
       image.dummyData.externalElement.style.top = xy.y + 'px';
       image.dummyData.externalElement.style.left = xy.x + 'px';
-    });
-  
+    });  
   }
   
-  // this function creates and returns a new marker element
   createCustomMarker(image) {
     
     let chart = image.dataItem.component.chart;
   
-    // create holder
     let holder = document.createElement( 'div' );
     holder.className = 'map-marker';
     holder.title = image.dataItem.dataContext.title;
     holder.style.position = 'absolute';
-  
-    // maybe add a link to it?
-    if ( undefined != image.url ) {
-      holder.onclick = function() {
-        window.location.href = image.url;
-      };
-      holder.className += ' map-clickable';
-    }
 
-    // create dot
     let dot = document.createElement('div');
     dot.className = 'dot';
     dot.style.borderColor = '#ff6666';
     holder.appendChild(dot);
   
-    // create pulse
     let pulse = document.createElement( 'div' );
     pulse.className = 'pulse';
     pulse.style.borderColor = '#ff6666';
     holder.appendChild(pulse);
   
-    // append the marker to the map container
     chart.svgContainer.htmlElement.appendChild(holder);
   
     return holder;
+  }
+
+  getBuildings() {
+
+    this.service.getBuildings()
+      .subscribe(response => {
+        console.log(response);
+
+        this.buildings = response;
+        this.initAmchartsMap();
+      },
+        error => console.log(error)
+    );
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { AccountService } from 'src/app/shared/services/account.service';
-import { SignInModel } from 'src/app/shared/models/signIn.model';
+import { SignInModel } from 'src/app/shared/models/account/signIn.model';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +12,6 @@ import { SignInModel } from 'src/app/shared/models/signIn.model';
 export class SignInComponent implements OnInit {
 
   validateForm: FormGroup;
-  signInModel: SignInModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,16 +33,22 @@ export class SignInComponent implements OnInit {
   }
 
   signIn() {
-    if (!this.validateForm.valid) {
-      return;
-    }
+    var signInModel = this.getModelByForm();
 
-    this.service.signIn(this.signInModel)
+    this.service.signIn(signInModel)
       .subscribe(response => {
         localStorage.setItem('token', response);
       },
         error => console.log(error)
     );
+  }
+
+  private getModelByForm(): SignInModel {
+    var signInModel = new SignInModel();
+    signInModel.email = this.validateForm.value.email;
+    signInModel.password = this.validateForm.value.password;
+
+    return signInModel;
   }
 
 }

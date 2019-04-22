@@ -5,17 +5,18 @@
     <div class="login_wrapper">
       <div class="animate form login_form">
         <section class="login_content">
-          <form>
+          <form [formGroup]="validateForm" (submit)="signIn()">
             <h1>Login Form</h1>
             <div>
-              <input [(ngModel)]="signInModel.email" type="text" class="form-control" placeholder="Email" />
+              <input formControlName="email" type="text" class="form-control" placeholder="Email" />
             </div>
             <div>
-              <input [(ngModel)]="signInModel.email" type="password" class="form-control" placeholder="Password" />
+              <input formControlName="password" type="password" class="form-control" placeholder="Password" />
             </div>
             <div>
-              <button type="button" class="btn btn-primary btn-sm btn-log">Log in</button>
+              <button type="submit" class="btn btn-primary btn-sm btn-log" [disabled]="!validateForm.valid">Log in</button>
             </div>
+          </form>
 
             <div class="clearfix"></div>
 
@@ -32,7 +33,6 @@
                 <p>©2019 All Rights Reserved. SaveBridge Area! Privacy and Terms</p>
               </div>
             </div>
-          </form>
         </section>
       </div> 
       

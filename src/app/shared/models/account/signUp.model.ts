@@ -1,4 +1,4 @@
-export interface SignUpModel {
+export class SignUpModel {
     email: string;
     password: string;
     confirmPassword: string;
