@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 
 import { SignInModel } from '../models/account/signIn.model';
 import { SignUpModel } from '../models/account/signUp.model';
+import { AuthResponseModel } from '../models/account/authResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,14 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  signIn(model: SignInModel): Observable<string> {
+  signIn(model: SignInModel): Observable<AuthResponseModel> {
     return this.http
-      .post<string>((`${this.url}signin`), model);
+      .post<AuthResponseModel>((`${this.url}signin`), model);
   }
 
-  signUp(model: SignUpModel): Observable<string> {
+  signUp(model: SignUpModel): Observable<AuthResponseModel> {
     return this.http
-      .post<string>((`${this.url}signup`), model);
+      .post<AuthResponseModel>((`${this.url}signup`), model);
   }
 
 }

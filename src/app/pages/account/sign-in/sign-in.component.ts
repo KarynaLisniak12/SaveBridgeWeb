@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {Router} from "@angular/router"
 
 import { AccountService } from 'src/app/shared/services/account.service';
 import { SignInModel } from 'src/app/shared/models/account/signIn.model';
@@ -15,7 +16,8 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: AccountService
+    private service: AccountService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -37,7 +39,8 @@ export class SignInComponent implements OnInit {
 
     this.service.signIn(signInModel)
       .subscribe(response => {
-        localStorage.setItem('token', response);
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/building/dashboard']);
       },
         error => console.log(error)
     );
